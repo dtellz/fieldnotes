@@ -1,3 +1,15 @@
+<p align="center">
+  <a href="https://dtellz.github.io/fieldnotes/">
+    <img src="assets/readme/fieldnotes-header.png" alt="An open field notebook unfolds into a constellation of scientific instruments, classical art, mathematical forms, and connected ideas." width="960">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://dtellz.github.io/fieldnotes/">
+    <img src="https://img.shields.io/website?url=https%3A%2F%2Fdtellz.github.io%2Ffieldnotes%2F&amp;label=site&amp;up_message=up&amp;down_message=down&amp;up_color=c5f277&amp;down_color=e57373&amp;labelColor=202326&amp;style=flat-square" alt="Fieldnotes website availability: up or down">
+  </a>
+</p>
+
 # Fieldnotes
 
 **A visual learning site for erudites: people who want to understand many things deeply.**
@@ -49,6 +61,8 @@ One-time setup:
 The successful **Publish GitHub Pages** job shows the live URL. See [GitHub's custom Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) for details.
 
 The workflow detects the default branch, whether it is `master` or `main`. Pull requests and other branches run checks; merging into the default branch publishes the changes. Failed checks leave the last successful site live.
+
+The header badge uses [Shields.io's website check](https://shields.io/badges/website) for `https://dtellz.github.io/fieldnotes/`. It reports HTTP availability, with caching by Shields.io and GitHub; it is not a continuous uptime monitor or a check of every interaction. Update the header links and badge URL if the site moves.
 
 ## Run locally
 
