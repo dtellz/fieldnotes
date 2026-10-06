@@ -1,16 +1,14 @@
 # Fieldnotes
 
-A dark, interactive learning library. The first topic is **AI & Deep Learning**; its first lesson is **Inside the transformer**, with eleven chapters from tokens and attention to publicly documented 2026 architectures.
+A visual learning library for erudites and curious generalists, built around interactive explanations that support deep understanding across disciplines. Read the [project's purpose and lesson principles](../README.md) for the direction of the collection.
 
-## Review locally
+The first topic is **AI & Deep Learning**; its first lesson is **Inside the transformer**, with eleven chapters from tokens and attention to publicly documented 2026 architectures. This directory contains the website and its supporting checks.
 
-No installation or build step is needed. From this folder:
+## Content and sources
 
-```sh
-npm start
-```
+Primary sources are linked within the lesson and collected in its final chapter. Research was checked on **6 October 2026**, including Qwen3.5, DeepSeek-V4, and the September DeepSeek-V4.1-Flash announcement. These are selected published examples, not an exhaustive ranking of frontier models; undisclosed proprietary internals are not inferred.
 
-Open **http://127.0.0.1:4173**. Alternatively, serve `dist/` with any static HTTP server. Use HTTP rather than double-clicking the HTML: the application uses JavaScript modules.
+Experiments use small illustrative vectors and parameters. The attention, softmax, rotary rotations, gradient updates, routing, and cache calculations are real; the examples are not extracted from a pretrained language model. Generation uses a labeled toy transition model to demonstrate feedback and sampling. Architecture schematics omit implementation details.
 
 ## Layout
 
@@ -36,18 +34,22 @@ The repository's [GitHub Actions workflow](../.github/workflows/pages.yml) publi
 
 Keep asset references relative. The application derives its navigation base from the script URL, so it works at both `/` and `/<repository>/` without a hard-coded repository name. Every new lesson should have its own `index.html` for direct links to work on Pages.
 
-## Checks
+## Run locally and check changes
+
+With Node.js and Python 3 available, no package installation or build step is needed. From this folder:
+
+```sh
+npm start
+```
+
+Open **http://127.0.0.1:4173**. Alternatively, serve `dist/` with any static HTTP server. Use HTTP rather than double-clicking the HTML: the application uses JavaScript modules.
+
+To validate changes:
 
 ```sh
 npm run check
 ```
 
-Runs JavaScript syntax validation, eight mathematical invariant tests, and local asset/chapter link checks. Browser visual review is intentionally left to the owner. The layouts include small-screen diagram panning, keyboard controls, visible focus, and reduced-motion support.
-
-## Content and limitations
-
-Primary sources are linked within the lesson and collected in its final chapter. Research was checked on **6 October 2026**, including Qwen3.5, DeepSeek-V4, and the September DeepSeek-V4.1-Flash announcement. These are selected published examples, not an exhaustive ranking of frontier models; undisclosed proprietary internals are not inferred.
-
-Experiments use small illustrative vectors and parameters. The attention, softmax, rotary rotations, gradient updates, routing, and cache calculations are real; the examples are not extracted from a pretrained language model. Generation uses a labeled toy transition model to demonstrate feedback and sampling. Architecture schematics omit implementation details.
+Runs JavaScript syntax validation, eight mathematical invariant tests, and local asset/chapter link checks at root and repository subpaths. Also review changed lessons in a browser, including keyboard controls, small-screen diagrams, and reduced-motion behavior.
 
 No API keys, backend, analytics, or runtime package dependencies. Google Fonts is optional; system fallbacks work when unavailable. The workflow handles publishing after the GitHub repository is connected and Pages is enabled.
