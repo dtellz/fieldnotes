@@ -1,7 +1,9 @@
 import {readFile,readdir,stat} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
+import {systemsLessons} from '../dist/assets/systems-curriculum.js';
+import {topicCatalog} from '../dist/assets/catalog.js';
 const root=resolve('dist');let checked=0;
-const bases=['/','/learning-sites/'];
+const bases=['/','/fieldnotes/'];
 async function checkReference(file,reference){
   if(/^(?:[a-z][a-z\d+.-]*:|\/\/|#)/i.test(reference))return;
   for(const base of bases){
@@ -33,4 +35,7 @@ const app=await readFile(resolve(root,'assets/app.js'),'utf8');
 const slugs=[...app.matchAll(/^  \['([a-z]+)'/gm)].map(x=>x[1]);
 for(const [,slug]of app.matchAll(/href="#([a-z]+)"/g)){if(slug!=='main'&&!slugs.includes(slug))throw Error(`Unknown chapter: ${slug}`);}
 if(slugs.length!==11)throw Error('Expected eleven lesson chapters');
-console.log(`Verified ${checked} asset/import resolutions at root and repository subpaths, and ${slugs.length} chapter routes.`);
+for(const topic of topicCatalog)await stat(resolve(root,'topics',topic.slug,'index.html'));
+for(const lesson of systemsLessons)await stat(resolve(root,'topics/distributed-systems',lesson.slug,'index.html'));
+const systemsCount=systemsLessons.reduce((n,l)=>n+l.chapters.length,0);
+console.log(`Verified ${checked} asset/import resolutions, ${topicCatalog.length} topic routes, and ${slugs.length+systemsCount} chapters at root and repository subpaths.`);

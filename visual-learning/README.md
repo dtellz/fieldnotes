@@ -2,13 +2,15 @@
 
 A visual learning library for erudites and curious generalists, built around interactive explanations that support deep understanding across disciplines. Read the [project's purpose and lesson principles](../README.md) for the direction of the collection.
 
-The first topic is **AI & Deep Learning**; its first lesson is **Inside the transformer**, with eleven chapters from tokens and attention to publicly documented 2026 architectures. This directory contains the website and its supporting checks.
+The collection includes **AI & Deep Learning** with eleven transformer chapters, and **Distributed Systems** with eight lessons and 32 experiments covering foundations, coordination, data, scaling, messaging, resilience, operations, and architecture. This directory contains the website and its supporting checks.
 
 ## Content and sources
 
 Primary sources are linked within the lesson and collected in its final chapter. Research was checked on **6 October 2026**, including Qwen3.5, DeepSeek-V4, and the September DeepSeek-V4.1-Flash announcement. These are selected published examples, not an exhaustive ranking of frontier models; undisclosed proprietary internals are not inferred.
 
 Experiments use small illustrative vectors and parameters. The attention, softmax, rotary rotations, gradient updates, routing, and cache calculations are real; the examples are not extracted from a pretrained language model. Generation uses a labeled toy transition model to demonstrate feedback and sampling. Architecture schematics omit implementation details.
+
+Distributed-systems experiments use explicit, small models: fixed replica membership, selected failure windows, queueing assumptions, and synthetic workloads. They are teaching tools rather than protocol implementations or production benchmarks. Each chapter includes its model scope, a scenario question, deeper reasoning, and primary sources such as the Raft paper, PostgreSQL documentation, Kafka design documentation, and Google's SRE books.
 
 ## Layout
 
@@ -17,16 +19,25 @@ dist/
   index.html                       Topic index
   topics/ai/index.html             AI & Deep Learning lessons
   topics/ai/transformers/index.html First lesson
-  assets/app.js                    Navigation, content, experiments
-  assets/math.js                   Numerical models
+  topics/distributed-systems/       Topic index and eight lesson directories
+  assets/catalog.js                Shared topic index
+  assets/app.js                    Transformer lesson and AI navigation
+  assets/math.js                   Transformer numerical models
+  assets/systems.js                Distributed-systems navigation and lesson shell
+  assets/systems-curriculum.js     Lesson content, questions, and sources
+  assets/systems-labs.js           32 interactive experiments
+  assets/systems-models.js         Distributed-systems numerical/state models
   assets/style.css                 Shared dark visual system
+  assets/systems.css               Distributed-systems diagrams and layout
 ```
 
 Each chapter has a linkable URL fragment, e.g. `/topics/ai/transformers/#attention`. Topic and lesson routes are real directories, so direct links work on a basic static server. Source files live directly in `dist/`; it is not generated output.
 
 ## Extending the collection
 
-Add a folder under `dist/topics/` for each topic and a nested folder for each lesson. Reuse the stylesheet and page shell. Add the topic/lesson to the index in `library()` and register its page renderer. The current transformer chapter registry is `chapters`; each entry maps to a renderer in `renderers`.
+Add a folder under `dist/topics/` for each topic and a nested folder for each lesson. Reuse the stylesheet and page shell. Register the topic in `topicCatalog` in `assets/catalog.js` and provide its index and lesson entry points.
+
+For Distributed Systems, add lesson metadata and chapters to `systemsLessons` in `systems-curriculum.js`, create the matching lesson `index.html`, and register any new experiment in `systems-labs.js`. Each chapter names its experiment, sources, and answer explanation. The topic cards and sequential lesson navigation are derived from this registry. The transformer chapter registry remains `chapters` in `app.js`, with renderers in `renderers`.
 
 ## Automatic publishing
 
@@ -50,6 +61,6 @@ To validate changes:
 npm run check
 ```
 
-Runs JavaScript syntax validation, eight mathematical invariant tests, and local asset/chapter link checks at root and repository subpaths. Also review changed lessons in a browser, including keyboard controls, small-screen diagrams, and reduced-motion behavior.
+Runs syntax validation for every asset module, mathematical and distributed-state invariant tests, and local asset/chapter link checks at root and repository subpaths. Also review changed lessons in a browser, including keyboard controls, small-screen diagrams, and reduced-motion behavior.
 
 No API keys, backend, analytics, or runtime package dependencies. Google Fonts is optional; system fallbacks work when unavailable. The workflow handles publishing after the GitHub repository is connected and Pages is enabled.

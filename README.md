@@ -36,11 +36,23 @@ The collection is organized by **topic → lesson → experiment**, so each subj
 
 ## Explore the collection
 
-| Topic | First lesson | What you will understand |
+| Topic | Lessons | What you will understand |
 | --- | --- | --- |
 | AI & Deep Learning | [Inside the transformer](visual-learning/dist/topics/ai/transformers/index.html) | How tokens become representations, how attention moves information, how models learn, and how modern architectures manage memory and computation. |
+| Distributed Systems | [Eight-lesson learning path](https://dtellz.github.io/fieldnotes/topics/distributed-systems/) | How to design around partial failure, preserve data invariants, distribute work, and operate reliable systems. |
 
-The first lesson contains eleven interactive chapters, from embeddings and attention to documented frontier architectures. Further disciplines will grow from the same ambition: breadth supported by depth.
+The transformer lesson contains eleven interactive chapters. Distributed Systems adds **32 experiments and 32 scenario questions** across eight lessons:
+
+1. **The rules of the network** — request paths, queues, clocks, and partitions.
+2. **Copies that agree** — consistency, quorums, consensus, and conflicts.
+3. **Data that survives change** — durability, isolation, transactions, and schema evolution.
+4. **Where the work goes** — partitioning, skew, caching, and regions.
+5. **Work that crosses boundaries** — delivery, outboxes, streams, and workflows.
+6. **Services that fail gracefully** — deadlines, retries, overload, and API contracts.
+7. **Operate the promise** — SLOs, observability, releases, and recovery.
+8. **Make the trade-offs explicit** — capacity estimates, architecture examples, security, and decisions.
+
+Each experiment makes its assumptions visible, links to primary sources, and offers optional deeper explanations. Further disciplines will grow from the same ambition: breadth supported by depth.
 
 ## Growing the library
 

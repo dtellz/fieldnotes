@@ -8,3 +8,5 @@
 .diagram-scroll{overflow-x:auto;max-width:100%;scrollbar-color:#50643d #1a1e19;scrollbar-width:thin}.quiz-options button:disabled{opacity:1;cursor:default}.quiz-options button:disabled:not(.correct):not(.wrong){opacity:.65}
 @media(max-width:800px){.diagram-scroll .diagram{min-width:var(--diagram-min)}.diagram-scroll:after{content:'Pan diagram horizontally to explore';display:block;color:var(--muted);font-size:.75rem;text-align:center;padding:6px 0}.matrix .cell{font-size:.75rem}.token-row{gap:7px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.catalog-topics{display:grid;gap:22px}

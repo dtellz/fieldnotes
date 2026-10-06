@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "An expandable library of visual learning experiments, beginning with transformers.",
+  "description": "Interactive visual lessons in AI, distributed systems, and more.",
   "scripts": {
     "start": "python3 -m http.server 4173 --bind 127.0.0.1 --directory dist",
-    "check": "node --check dist/assets/app.js && node --check dist/assets/math.js && node --test tests/math.test.js && node scripts/check-links.js"
+    "check": "node scripts/check-syntax.js && node --test tests/*.test.js && node scripts/check-links.js"
   }
 }
