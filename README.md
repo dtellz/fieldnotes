@@ -42,6 +42,7 @@ The collection is organized by **topic → lesson → experiment**, so each subj
 | Distributed Systems | [Eight-lesson learning path](https://dtellz.github.io/fieldnotes/topics/distributed-systems/) | How to design around partial failure, preserve data invariants, distribute work, and operate reliable systems. |
 | Computer Systems & Performance | [Six-lesson learning path](https://dtellz.github.io/fieldnotes/topics/computer-systems/) | How code executes, data moves, concurrent work stays correct, and measurements reveal what limits performance. |
 | Database Internals | [Six-lesson learning path](https://dtellz.github.io/fieldnotes/topics/database-internals/) | How storage, indexes, query execution, transactions, and recovery turn bytes into trustworthy results. |
+| Security Engineering | [Seven-lesson learning path](https://dtellz.github.io/fieldnotes/topics/security-engineering/) | How trust boundaries, identity, permission, data protection, and secure operations preserve a system’s guarantees. |
 
 The transformer lesson contains eleven interactive chapters. Distributed Systems adds **32 experiments and 32 scenario questions** across eight lessons:
 
@@ -71,6 +72,16 @@ Database Internals adds **24 experiments and 24 scenario questions** across six 
 4. **Give concurrent work a meaning** — snapshots, write skew, locks, and constraints.
 5. **Survive the interrupted write** — WAL, checkpoints, redo, and point-in-time recovery.
 6. **Keep the engine healthy** — vacuum, compaction, partition pruning, and query investigation.
+
+Security Engineering adds **28 experiments and 28 scenario questions** across seven lessons:
+
+1. **Start with what must remain true** — assets, trust boundaries, least privilege, and independent attack paths.
+2. **Establish and preserve identity** — password storage, passkeys, sessions, and federated sign-in.
+3. **Decide who may do what** — object authorization, tenant isolation, policies, and token validation.
+4. **Keep untrusted data in its lane** — injection, XSS, CSRF/CORS, and server-side fetching.
+5. **Protect data through its lifecycle** — TLS, authenticated encryption, envelope rotation, and retention.
+6. **Ship software with bounded authority** — provenance, exposed secrets, runtime hardening, and negative tests.
+7. **Detect, contain, and learn** — abuse budgets, audit evidence, incident response, and diagnosis.
 
 Each experiment makes its assumptions visible, links to primary sources, and offers optional deeper explanations. Further disciplines will grow from the same ambition: breadth supported by depth.
 
