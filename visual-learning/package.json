@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Interactive visual lessons in AI, distributed systems, computer systems, and performance.",
+  "description": "Interactive visual lessons in AI, distributed systems, computer performance, and database internals.",
   "scripts": {
     "start": "python3 -m http.server 4173 --bind 127.0.0.1 --directory dist",
     "check": "node scripts/check-syntax.js && node --test tests/*.test.js && node scripts/check-links.js"
