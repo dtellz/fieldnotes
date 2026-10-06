@@ -48,22 +48,6 @@ New lessons should begin with a question worth understanding and an interaction 
 
 The website lives in [`visual-learning/`](visual-learning/README.md). Its project guide describes the structure and how to add topics and lessons. Publishable content belongs in `visual-learning/dist/`; add each new lesson to the collection index so readers can find it.
 
-## Publish with GitHub Pages
-
-The [deployment workflow](.github/workflows/pages.yml) publishes the entire collection after successful checks on every push to the repository's **default branch**. Future lessons inside `visual-learning/dist/` are included automatically.
-
-One-time setup:
-
-1. Connect this local repository to a GitHub repository and push the files, including `.github/workflows/pages.yml`.
-2. On GitHub, open **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**.
-3. Open **Actions → Check and deploy learning site → Run workflow** on the default branch, or push another commit to that branch.
-
-The successful **Publish GitHub Pages** job shows the live URL. See [GitHub's custom Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) for details.
-
-The workflow detects the default branch, whether it is `master` or `main`. Pull requests and other branches run checks; merging into the default branch publishes the changes. Failed checks leave the last successful site live.
-
-The header badge uses [Shields.io's website check](https://shields.io/badges/website) for `https://dtellz.github.io/fieldnotes/`. It reports HTTP availability, with caching by Shields.io and GitHub; it is not a continuous uptime monitor or a check of every interaction. Update the header links and badge URL if the site moves.
-
 ## Run locally
 
 With Node.js and Python 3 available, no package installation or build step is needed:
