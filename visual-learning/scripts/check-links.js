@@ -1,6 +1,7 @@
 import {readFile,readdir,stat} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
 import {systemsLessons} from '../dist/assets/systems-curriculum.js';
+import {computerLessons} from '../dist/assets/computer-curriculum.js';
 import {topicCatalog} from '../dist/assets/catalog.js';
 const root=resolve('dist');let checked=0;
 const bases=['/','/fieldnotes/'];
@@ -35,7 +36,21 @@ const app=await readFile(resolve(root,'assets/app.js'),'utf8');
 const slugs=[...app.matchAll(/^  \['([a-z]+)'/gm)].map(x=>x[1]);
 for(const [,slug]of app.matchAll(/href="#([a-z]+)"/g)){if(slug!=='main'&&!slugs.includes(slug))throw Error(`Unknown chapter: ${slug}`);}
 if(slugs.length!==11)throw Error('Expected eleven lesson chapters');
-for(const topic of topicCatalog)await stat(resolve(root,'topics',topic.slug,'index.html'));
-for(const lesson of systemsLessons)await stat(resolve(root,'topics/distributed-systems',lesson.slug,'index.html'));
-const systemsCount=systemsLessons.reduce((n,l)=>n+l.chapters.length,0);
-console.log(`Verified ${checked} asset/import resolutions, ${topicCatalog.length} topic routes, and ${slugs.length+systemsCount} chapters at root and repository subpaths.`);
+for(const topic of topicCatalog){
+  await stat(resolve(root,'topics',topic.slug,'index.html'));
+  await stat(resolve(root,'topics',topic.slug,topic.first,'index.html'));
+}
+const courses=[['distributed-systems',systemsLessons],['computer-systems',computerLessons]];
+for(const [slug,lessons] of courses){
+  const topic=topicCatalog.find(t=>t.slug===slug);
+  if(topic?.count!==lessons.length)throw Error(`Catalog lesson count differs for ${slug}`);
+  if(topic.experiments!==lessons.reduce((n,l)=>n+l.chapters.length,0))throw Error(`Catalog experiment count differs for ${slug}`);
+  for(const lesson of lessons){
+    const file=resolve(root,'topics',slug,lesson.slug,'index.html');
+    await stat(file);
+    // Exercise the same topic → lesson → chapter URLs rendered by the course shells.
+    for(const chapter of lesson.chapters)await checkReference(resolve(root,'index.html'),`topics/${slug}/${lesson.slug}/#${chapter.id}`);
+  }
+}
+const courseChapters=courses.flatMap(([,lessons])=>lessons.flatMap(l=>l.chapters)).length;
+console.log(`Verified ${checked} asset/import/lesson resolutions, ${topicCatalog.length} topic routes, and ${slugs.length+courseChapters} chapters at root and repository subpaths.`);

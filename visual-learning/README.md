@@ -2,7 +2,7 @@
 
 A visual learning library for erudites and curious generalists, built around interactive explanations that support deep understanding across disciplines. Read the [project's purpose and lesson principles](../README.md) for the direction of the collection.
 
-The collection includes **AI & Deep Learning** with eleven transformer chapters, and **Distributed Systems** with eight lessons and 32 experiments covering foundations, coordination, data, scaling, messaging, resilience, operations, and architecture. This directory contains the website and its supporting checks.
+The collection includes **AI & Deep Learning** with eleven transformer chapters, and **Distributed Systems** with eight lessons and 32 experiments covering foundations, coordination, data, scaling, messaging, resilience, operations, and architecture. It also includes **Computer Systems & Performance**, with six lessons and 24 experiments covering execution, memory, operating systems, concurrency, I/O, and diagnosis. This directory contains the website and its supporting checks.
 
 ## Content and sources
 
@@ -12,6 +12,8 @@ Experiments use small illustrative vectors and parameters. The attention, softma
 
 Distributed-systems experiments use explicit, small models: fixed replica membership, selected failure windows, queueing assumptions, and synthetic workloads. They are teaching tools rather than protocol implementations or production benchmarks. Each chapter includes its model scope, a scenario question, deeper reasoning, and primary sources such as the Raft paper, PostgreSQL documentation, Kafka design documentation, and Google's SRE books.
 
+Computer-systems experiments use deterministic teaching models, not browser benchmarks or measurements of your hardware. They expose dependencies, LRU cache state, lock ownership, task lifetimes, and explicit performance budgets. Every chapter includes a question, expandable depth, and primary sources from architecture research, OSTEP, platform documentation, and performance-tool authors.
+
 ## Layout
 
 ```text
@@ -20,6 +22,7 @@ dist/
   topics/ai/index.html             AI & Deep Learning lessons
   topics/ai/transformers/index.html First lesson
   topics/distributed-systems/       Topic index and eight lesson directories
+  topics/computer-systems/          Topic index and six lesson directories
   assets/catalog.js                Shared topic index
   assets/app.js                    Transformer lesson and AI navigation
   assets/math.js                   Transformer numerical models
@@ -27,6 +30,14 @@ dist/
   assets/systems-curriculum.js     Lesson content, questions, and sources
   assets/systems-labs.js           32 interactive experiments
   assets/systems-models.js         Distributed-systems numerical/state models
+  assets/computer.js               Computer-systems course configuration
+  assets/computer-curriculum.js    24 chapters, questions, and primary sources
+  assets/computer-labs.js          Stateful experiments
+  assets/computer-models.js        Execution, memory, concurrency, and timing models
+  assets/computer-ui.js            Diagram primitives
+  assets/course.js                 Reusable topic/lesson navigation shell
+  assets/experiment-ui.js          Shared experiment controls and reset lifecycle
+  assets/computer.css              Computer-systems diagrams and responsive layout
   assets/style.css                 Shared dark visual system
   assets/systems.css               Distributed-systems diagrams and layout
 ```
@@ -39,9 +50,11 @@ Add a folder under `dist/topics/` for each topic and a nested folder for each le
 
 For Distributed Systems, add lesson metadata and chapters to `systemsLessons` in `systems-curriculum.js`, create the matching lesson `index.html`, and register any new experiment in `systems-labs.js`. Each chapter names its experiment, sources, and answer explanation. The topic cards and sequential lesson navigation are derived from this registry. The transformer chapter registry remains `chapters` in `app.js`, with renderers in `renderers`.
 
+For Computer Systems & Performance, add metadata to `computerLessons` in `computer-curriculum.js`, register the experiment in `computer-labs.js`, and add a matching lesson `index.html`. `computer.js` configures the reusable `course.js` shell; `experiment-ui.js` supplies controls and resets for both systems topics. Keep calculations in the model modules and test the guarantees the diagrams teach. Topic and experiment counts are derived from the curriculum.
+
 ## Automatic publishing
 
-The repository's [GitHub Actions workflow](../.github/workflows/pages.yml) publishes this entire `dist/` folder after successful checks on every push to the default branch. Future topics, lessons, and assets inside `dist/` are included automatically. See the [one-time GitHub Pages setup](../README.md#publish-with-github-pages).
+The repository's [GitHub Actions workflow](../.github/workflows/pages.yml) publishes this entire `dist/` folder after successful checks on every push to the default branch. Future topics, lessons, and assets inside `dist/` are included automatically. The repository’s Pages source must be set to **GitHub Actions** in Settings → Pages. Changes can take a little time to propagate after a successful deployment.
 
 Keep asset references relative. The application derives its navigation base from the script URL, so it works at both `/` and `/<repository>/` without a hard-coded repository name. Every new lesson should have its own `index.html` for direct links to work on Pages.
 
@@ -61,6 +74,6 @@ To validate changes:
 npm run check
 ```
 
-Runs syntax validation for every asset module, mathematical and distributed-state invariant tests, and local asset/chapter link checks at root and repository subpaths. Also review changed lessons in a browser, including keyboard controls, small-screen diagrams, and reduced-motion behavior.
+Runs syntax validation for every asset module, mathematical, execution, memory, concurrency, and distributed-state invariant tests, and local asset/chapter link checks at root and repository subpaths. Also review changed lessons in a browser, including keyboard controls, small-screen diagrams, and reduced-motion behavior.
 
 No API keys, backend, analytics, or runtime package dependencies. Google Fonts is optional; system fallbacks work when unavailable. The workflow handles publishing after the GitHub repository is connected and Pages is enabled.

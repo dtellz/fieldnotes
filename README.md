@@ -40,6 +40,7 @@ The collection is organized by **topic → lesson → experiment**, so each subj
 | --- | --- | --- |
 | AI & Deep Learning | [Inside the transformer](visual-learning/dist/topics/ai/transformers/index.html) | How tokens become representations, how attention moves information, how models learn, and how modern architectures manage memory and computation. |
 | Distributed Systems | [Eight-lesson learning path](https://dtellz.github.io/fieldnotes/topics/distributed-systems/) | How to design around partial failure, preserve data invariants, distribute work, and operate reliable systems. |
+| Computer Systems & Performance | [Six-lesson learning path](https://dtellz.github.io/fieldnotes/topics/computer-systems/) | How code executes, data moves, concurrent work stays correct, and measurements reveal what limits performance. |
 
 The transformer lesson contains eleven interactive chapters. Distributed Systems adds **32 experiments and 32 scenario questions** across eight lessons:
 
@@ -51,6 +52,15 @@ The transformer lesson contains eleven interactive chapters. Distributed Systems
 6. **Services that fail gracefully** — deadlines, retries, overload, and API contracts.
 7. **Operate the promise** — SLOs, observability, releases, and recovery.
 8. **Make the trade-offs explicit** — capacity estimates, architecture examples, security, and decisions.
+
+Computer Systems & Performance adds **24 experiments and 24 scenario questions** across six lessons:
+
+1. **From code to execution** — bits, instruction dependencies, branch prediction, and parallel speedup.
+2. **Make data cheap to reach** — cache traversal, false sharing, bandwidth limits, and allocation versus retention.
+3. **The operating system mediates** — processes, scheduling, virtual memory, and container budgets.
+4. **Make concurrent work correct** — lost updates, deadlocks, memory ordering, and task lifetimes.
+5. **Move bytes without losing control** — batching, durability, event loops, and network windows.
+6. **Measure before you optimize** — profiles, tail latency, benchmark bias, and evidence-led diagnosis.
 
 Each experiment makes its assumptions visible, links to primary sources, and offers optional deeper explanations. Further disciplines will grow from the same ambition: breadth supported by depth.
 

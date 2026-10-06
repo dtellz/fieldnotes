@@ -1,3 +1,4 @@
+import {mountExperiment} from './experiment-ui.js';
 import {majority,queueModel,tailProbability,quorum,placement,shardLoads,retrySchedule,bucketStep,burnRate,estimate,vectorRelation,applyDelivery,recovery} from './systems-models.js';
 const R=(key,label,min,max,step=1)=>({kind:'range',key,label,min,max,step});
 const C=(key,label,options)=>({kind:'choice',key,label,options});
@@ -125,15 +126,6 @@ const decisions={
 labs.decisions=()=>({title:'Record why a boundary exists',state:{choice:'Start simply',evidence:'No measured constraint'},controls:[C('choice','Proposed evolution',Object.keys(decisions)),C('evidence','Evidence',['No measured constraint','Measured independent scaling need','Independent ownership and release need'])],render:s=>{
  const justified=s.choice==='Start simply'||s.choice==='Isolate a bottleneck'&&s.evidence==='Measured independent scaling need'||s.choice==='Split by ownership'&&s.evidence==='Independent ownership and release need';return flow(decisions[s.choice])+table(['Decision record','Make explicit'],[['Requirement','What invariant or constraint must improve?'],['Cost','Latency, coordination, operations, and recovery'],['Validation','Load / failure / compatibility experiment'],['Revisit trigger','A measured limit, not a calendar date']])+note(justified?'The evidence can support this direction. Validate the assumptions, plan migration, and assign operational ownership.':'The selected evidence does not yet justify this boundary. Find a measurable need or choose a simpler reversible starting point.',!justified);},foot:'A reasoning aid, not an architecture score. Context can justify choices beyond these three examples.'});
 
-export function mountLab(element,id){
- const spec=labs[id]();let state=structuredClone(spec.state);
- const controls=spec.controls.map(c=>c.kind==='range'?`<div class="control"><label for="control-${c.key}">${c.label}<output id="value-${c.key}"></output></label><input id="control-${c.key}" data-key="${c.key}" type="range" min="${c.min}" max="${c.max}" step="${c.step}"></div>`:c.kind==='choice'?`<label class="control">${c.label}<select data-key="${c.key}">${c.options.map(x=>`<option>${x}</option>`).join('')}</select></label>`:c.kind==='toggle'?`<label class="check"><input type="checkbox" data-key="${c.key}">${c.label}</label>`:`<button class="btn subtle" data-action="${c.key}">${c.label}</button>`).join('');
- element.innerHTML=`<section class="lab ds-lab"><div class="lab-head"><span class="lab-title">${spec.title}</span><button class="ds-reset" data-reset>Reset</button></div><div class="ds-controls">${controls}</div><div class="lab-body" id="lab-output"></div><div class="lab-foot"><span>${spec.foot}</span></div></section>`;
- function draw(){element.querySelectorAll('[data-key]').forEach(el=>{const k=el.dataset.key;if(el.type==='checkbox')el.checked=state[k];else el.value=state[k];const out=element.querySelector('#value-'+k);if(out)out.textContent=fmt(state[k],2);});element.querySelector('#lab-output').innerHTML=spec.render(state);}
- element.oninput=e=>{const el=e.target;if(el.dataset.key){state[el.dataset.key]=el.type==='checkbox'?el.checked:el.type==='range'?+el.value:el.value;spec.onChange?.(state,el.dataset.key);draw();}};
- element.onchange=e=>{if(e.target.tagName==='SELECT'){state[e.target.dataset.key]=e.target.value;spec.onChange?.(state,e.target.dataset.key);draw();}};
- element.onclick=e=>{const reset=e.target.closest('[data-reset]'),action=e.target.closest('[data-action]');if(reset){state=structuredClone(spec.state);draw();}else if(action){spec.actions?.[action.dataset.action]?.(state);draw();}};draw();
- return ()=>{element.oninput=null;element.onchange=null;element.onclick=null;};
-}
+export const mountLab=(element,id)=>mountExperiment(element,labs[id]());
 export const labIds=()=>Object.keys(labs);
 export const createLab=id=>labs[id]();
