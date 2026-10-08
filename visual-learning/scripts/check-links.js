@@ -1,5 +1,6 @@
 import {readFile,readdir,stat} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
+import {networkLessons} from '../dist/assets/network-curriculum.js';
 import {systemsLessons} from '../dist/assets/systems-curriculum.js';
 import {computerLessons} from '../dist/assets/computer-curriculum.js';
 import {securityLessons} from '../dist/assets/security-curriculum.js';
@@ -42,7 +43,7 @@ for(const topic of topicCatalog){
   await stat(resolve(root,'topics',topic.slug,'index.html'));
   await stat(resolve(root,'topics',topic.slug,topic.first,'index.html'));
 }
-const courses=[['distributed-systems',systemsLessons],['computer-systems',computerLessons],['database-internals',databaseLessons],['security-engineering',securityLessons]];
+const courses=[['distributed-systems',systemsLessons],['computer-systems',computerLessons],['database-internals',databaseLessons],['security-engineering',securityLessons],['networking-and-the-web',networkLessons]];
 for(const [slug,lessons] of courses){
   const topic=topicCatalog.find(t=>t.slug===slug);
   if(topic?.count!==lessons.length)throw Error(`Catalog lesson count differs for ${slug}`);

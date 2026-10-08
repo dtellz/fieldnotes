@@ -2,7 +2,7 @@
 
 A visual learning library for erudites and curious generalists, built around interactive explanations that support deep understanding across disciplines. Read the [project's purpose and lesson principles](../README.md) for the direction of the collection.
 
-The collection includes **AI & Deep Learning** with eleven transformer chapters, and **Distributed Systems** with eight lessons and 32 experiments covering foundations, coordination, data, scaling, messaging, resilience, operations, and architecture. It also includes **Computer Systems & Performance**, with six lessons and 24 experiments covering execution, memory, operating systems, concurrency, I/O, and diagnosis. **Database Internals** adds six lessons and 24 experiments on storage, indexes, physical query execution, transactions, recovery, and maintenance. **Security Engineering** adds seven lessons and 28 experiments on security design, identity, authorization, application boundaries, data protection, delivery, and operations. This directory contains the website and its supporting checks.
+The collection includes **AI & Deep Learning** with eleven transformer chapters, and **Distributed Systems** with eight lessons and 32 experiments covering foundations, coordination, data, scaling, messaging, resilience, operations, and architecture. It also includes **Computer Systems & Performance**, with six lessons and 24 experiments covering execution, memory, operating systems, concurrency, I/O, and diagnosis. **Database Internals** adds six lessons and 24 experiments on storage, indexes, physical query execution, transactions, recovery, and maintenance. **Security Engineering** adds seven lessons and 28 experiments on security design, identity, authorization, application boundaries, data protection, delivery, and operations. **Networking & the Web** adds seven lessons and 28 experiments on names and routes, transport, HTTP, intermediaries, browsers, delivery patterns, and diagnosis. This directory contains the website and its supporting checks.
 
 ## Content and sources
 
@@ -17,6 +17,8 @@ Computer-systems experiments use deterministic teaching models, not browser benc
 Database experiments use explicit miniature models: actual B+ tree insertion/splits, immutable LSM runs, probabilistic membership hints, snapshot timelines, write-ahead ordering, and idempotent redo. PostgreSQL, RocksDB, and DuckDB sources are linked where their behavior is discussed; the models do not claim to implement those engines or run SQL.
 
 Security experiments use explicit policy and lifecycle models: inspect tenant leakage, compare browser send/read decisions, migrate key envelopes, revoke credentials, and stage incident recovery. They do not execute attack payloads, send network requests, or implement cryptographic primitives. OWASP, IETF, W3C, OpenID, SLSA, and NIST sources support the explanations.
+
+Networking experiments use fixed packet paths, explicit cache state, byte-window arithmetic, dependency timelines, and bounded queue models. They do not probe networks, register service workers, modify browser caches, or benchmark the learner’s connection. Protocol sources come from IETF RFCs; browser and platform behavior links to MDN and NGINX documentation. Networking sources were checked on **8 October 2026**.
 
 ## Layout
 
@@ -34,6 +36,12 @@ dist/
   assets/security-labs.js          Interactive boundary and lifecycle diagrams
   assets/security-models.js        Policy decisions and state models
   assets/security.css              Security diagrams and responsive layout
+  topics/networking-and-the-web/   Topic index and seven lesson directories
+  assets/network.js                Networking course configuration
+  assets/network-curriculum.js     28 chapters, questions, and sources
+  assets/network-labs.js           Packet, stream, cache, and browser diagrams
+  assets/network-models.js         Deterministic network and scheduling models
+  assets/network.css               Networking diagrams and responsive layout
   assets/catalog.js                Shared topic index
   assets/app.js                    Transformer lesson and AI navigation
   assets/math.js                   Transformer numerical models
@@ -72,6 +80,8 @@ For Database Internals, add chapters to `databaseLessons` in `database-curriculu
 
 For Security Engineering, add chapters to `securityLessons` in `security-curriculum.js`, register experiments in `security-labs.js`, and create matching lesson directories. Keep policy semantics explicit, cover acceptance and rejection boundaries in `tests/security.test.js`, and include routes in `scripts/check-links.js`. Displayed code examples must remain escaped inert text; use established cryptographic contracts rather than invented implementations.
 
+For Networking & the Web, add chapters to `networkLessons` in `network-curriculum.js`, register experiments in `network-labs.js`, and create their lesson directories. Preserve explicit protocol assumptions and units, test invariants in `tests/network.test.js`, and include routes in `scripts/check-links.js`. Set `sourcesChecked` in the course configuration when verifying new course sources; existing courses retain their recorded date.
+
 ## Automatic publishing
 
 The repository's [GitHub Actions workflow](../.github/workflows/pages.yml) publishes this entire `dist/` folder after successful checks on every push to the default branch. Future topics, lessons, and assets inside `dist/` are included automatically. The repository’s Pages source must be set to **GitHub Actions** in Settings → Pages. Changes can take a little time to propagate after a successful deployment.
@@ -94,6 +104,6 @@ To validate changes:
 npm run check
 ```
 
-Runs syntax validation for every asset module, mathematical, execution, memory, concurrency, database, security-policy, and distributed-state invariant tests, and local asset/chapter link checks at root and repository subpaths. Also review changed lessons in a browser, including keyboard controls, small-screen diagrams, and reduced-motion behavior.
+Runs syntax validation for every asset module, mathematical, execution, memory, concurrency, database, security-policy, networking, and distributed-state invariant tests, and local asset/chapter link checks at root and repository subpaths. Also review changed lessons in a browser, including keyboard controls, small-screen diagrams, and reduced-motion behavior.
 
 No API keys, backend, analytics, or runtime package dependencies. Google Fonts is optional; system fallbacks work when unavailable. The workflow handles publishing after the GitHub repository is connected and Pages is enabled.

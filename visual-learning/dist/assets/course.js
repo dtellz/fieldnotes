@@ -59,7 +59,7 @@ export function renderCourse(config) {
       <div class="takeaway"><span class="eyebrow">The key idea</span><p>${c.takeaway}</p></div>
       ${c.depth.map(([label,text])=>details(label,`<p>${text}</p>`)).join('')}
       <section class="ds-check" aria-label="Check your understanding"><span class="eyebrow accent">Think it through</span><h3>${c.question}</h3><div class="quiz-options" id="chapter-quiz"></div><div id="quiz-feedback"></div></section>
-      ${details('Primary sources & model scope',`<div class="source-list">${c.source.map(key=>`<a class="source-item" href="${sources[key][1]}" target="_blank" rel="noopener">${sources[key][0]}</a>`).join('')}</div><p class="note">This experiment illustrates one mechanism under stated assumptions. It is not a benchmark or a complete implementation. Source links checked 6 October 2026.</p>`)}
+      ${details('Primary sources & model scope',`<div class="source-list">${c.source.map(key=>`<a class="source-item" href="${sources[key][1]}" target="_blank" rel="noopener">${sources[key][0]}</a>`).join('')}</div><p class="note">This experiment illustrates one mechanism under stated assumptions. It is not a benchmark or a complete implementation. Source links checked ${config.sourcesChecked || '6 October 2026'}.</p>`)}
       <footer class="lesson-footer"><a class="btn subtle" href="${chapterIndex?'#'+lesson.chapters[chapterIndex-1].id:topic}">${chapterIndex?'Previous':'Topic overview'}</a><a class="btn primary" href="${next[1]}">${next[0]}</a></footer>`;
     cleanup = mountLab($('#systems-lab'),c.lab);
     function drawQuiz() {

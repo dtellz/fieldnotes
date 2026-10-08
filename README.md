@@ -43,6 +43,7 @@ The collection is organized by **topic → lesson → experiment**, so each subj
 | Computer Systems & Performance | [Six-lesson learning path](https://dtellz.github.io/fieldnotes/topics/computer-systems/) | How code executes, data moves, concurrent work stays correct, and measurements reveal what limits performance. |
 | Database Internals | [Six-lesson learning path](https://dtellz.github.io/fieldnotes/topics/database-internals/) | How storage, indexes, query execution, transactions, and recovery turn bytes into trustworthy results. |
 | Security Engineering | [Seven-lesson learning path](https://dtellz.github.io/fieldnotes/topics/security-engineering/) | How trust boundaries, identity, permission, data protection, and secure operations preserve a system’s guarantees. |
+| Networking & the Web | [Seven-lesson learning path](https://dtellz.github.io/fieldnotes/topics/networking-and-the-web/) | How names resolve, packets travel, protocols deliver data, and browsers turn responses into responsive pages. |
 
 The transformer lesson contains eleven interactive chapters. Distributed Systems adds **32 experiments and 32 scenario questions** across eight lessons:
 
@@ -82,6 +83,16 @@ Security Engineering adds **28 experiments and 28 scenario questions** across se
 5. **Protect data through its lifecycle** — TLS, authenticated encryption, envelope rotation, and retention.
 6. **Ship software with bounded authority** — provenance, exposed secrets, runtime hardening, and negative tests.
 7. **Detect, contain, and learn** — abuse budgets, audit evidence, incident response, and diagnosis.
+
+Networking & the Web adds **28 experiments and 28 scenario questions** across seven lessons:
+
+1. **Find the destination, cross the network** — packet envelopes, routing prefixes, DNS caches, and path MTU.
+2. **Deliver bytes without overrunning the path** — loss, ordering, flow control, congestion, and connection reuse.
+3. **Give the exchange a protocol** — HTTPS handshakes, HTTP/2 and HTTP/3 streams, methods, and validators.
+4. **Put intermediaries to work** — proxy trust, load distribution, cache freshness, and representation keys.
+5. **Turn responses into a responsive page** — origins, rendering dependencies, task scheduling, and offline caches.
+6. **Choose how information moves** — redirects, compression, live updates, and stream backpressure.
+7. **Explain where the time went** — waterfalls, bandwidth-delay limits, deadlines, and evidence-led diagnosis.
 
 Each experiment makes its assumptions visible, links to primary sources, and offers optional deeper explanations. Further disciplines will grow from the same ambition: breadth supported by depth.
 
